@@ -10,7 +10,7 @@ namespace DataAccess.Concrete
     {
         public List<OperationClaim> GetClaims(User user)
         {
-            using (var context=new DatabaseContext())
+            using (var context = new DatabaseContext())
             {
                 var result = from oc in context.OperationClaims
                              join uoc in context.UserOperationClaims
@@ -21,8 +21,9 @@ namespace DataAccess.Concrete
                                  Id = oc.Id,
                                  Name = oc.Name
                              };
-                             return result.ToList();
+                return result.ToList();
+            }
         }
-    }
 
+    }
 }

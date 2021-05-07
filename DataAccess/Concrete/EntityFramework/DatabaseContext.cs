@@ -13,9 +13,9 @@ namespace DataAccess.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=BookStore;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-U3SN6ST\SQLEXPRESS;Database=BookStore;Trusted_Connection=true");
         }
-
+        
         public DbSet<Book> Books { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<BookImage> BookImages { get; set; }

@@ -11,7 +11,7 @@ namespace Business.Abstract
         IResult Delete(BookImage bookImage, IFormFile file);
         IResult Update(BookImage bookImage, IFormFile file);
         IDataResult<List<BookImage>> GetAll();
-        IDataResult<Book> GetById(int BookId);
+        IDataResult<BookImage> GetById(int BookImageId);
     
 
     }
