@@ -36,14 +36,13 @@ namespace Business.Concrete
             return new SuccessResult(Messages.Added);
         }
 
-        public IResult Delete(BookImage bookImage, IFormFile file)
+        public IResult Delete(BookImage bookImage)
         {
             var image = _bookImageDal.Get(img => img.ImageId == bookImage.ImageId);
             if (image == null)
             {
                 return new ErrorResult(Messages.BookImageNotFound);
             }
-            FileHelper.DeleteFile(image.ImagePath);
             _bookImageDal.Delete(bookImage);
             return new SuccessResult(Messages.Deleted);
         }

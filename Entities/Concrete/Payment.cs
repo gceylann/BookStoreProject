@@ -12,9 +12,11 @@ namespace Entities.Concrete
     {
         [Key]
         public int PaymentId { get; set; }
-        public int BookId { get; set; }
-        public int UserId { get; set; }
-        public DateTime ProcessDate { get; set; }
+        public int RentalId { get; set; }
+        public string NameSurname { get; set; }
+        public string CardNo { get; set; }
+        public string ExpirationDate { get; set; }
+        public string Cvc { get; set; }
 
     }
 }

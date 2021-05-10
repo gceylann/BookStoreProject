@@ -8,7 +8,7 @@ namespace Business.Abstract
     public interface IBookImageService
     {
         IResult Add(BookImage bookImage, IFormFile file);
-        IResult Delete(BookImage bookImage, IFormFile file);
+        IResult Delete(BookImage bookImage);
         IResult Update(BookImage bookImage, IFormFile file);
         IDataResult<List<BookImage>> GetAll();
         IDataResult<BookImage> GetById(int BookImageId);
