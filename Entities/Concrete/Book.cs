@@ -13,8 +13,9 @@ namespace Entities.Concrete
         [Key]
         public int BookId { get; set; }
         public int CategoryId { get; set; }
+        public int AuthorId { get; set; }
+        public int PublisherId { get; set; }
         public string BookName { get; set; }
-        public string Author { get; set; }
         public int Page { get; set; }
         public decimal Price { get; set; }
         public string Description { get; set; }

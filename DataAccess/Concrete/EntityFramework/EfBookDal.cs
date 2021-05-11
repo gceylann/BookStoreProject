@@ -22,15 +22,19 @@ namespace DataAccess.Concrete
                              on book.CategoryId equals category.CategoryId
                              join image in context.BookImages
                              on book.BookId equals image.BookId
+                             join author in context.Authors
+                             on book.AuthorId equals author.AuthorId
+                             join publisher in context.Publishers
+                             on book.PublisherId equals publisher.PublisherId
                              select new BookDetailDto
                              {
                                  BookId = book.BookId,
                                  BookName = book.BookName,
-                                 Author = book.Author,
+                                 AuthorName=author.AuthorName,
+                                 PublisherName=publisher.PublisherName,
                                  Page = book.Page,
                                  Price = book.Price,
                                  Description = book.Description,
-                                 CategoryId = book.CategoryId,
                                  CategoryName = category.CategoryName,
                                  ImagePath = image.ImagePath
                              };

@@ -10,9 +10,10 @@ namespace Entities.DTOs
     public class BookDetailDto:IDto
     {
         public int BookId { get; set; }
-        public int CategoryId { get; set; }
-        public string CategoryName { get; set; }
         public string BookName { get; set; }
+        public string CategoryName { get; set; }
+        public string AuthorName { get; set; }
+        public string PublisherName { get; set; }
         public string ImagePath { get; set; }
         public string Author { get; set; }
         public int Page { get; set; }
