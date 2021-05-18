@@ -17,6 +17,10 @@ namespace Business.Abstract
         IDataResult<List<Book>> GetAll();
         IDataResult<Book> GetById(int bookId);
         IDataResult<List<BookDetailDto>> GetBookDetails(int bookId);
+        IDataResult<List<Book>> GetBooksByCategory(int categoryId);
+        IDataResult<List<Book>> GetBooksByAuthor(int authorId);
+        IDataResult<List<Book>> GetBooksByPublisher(int publisherId);
+        IDataResult<List<Book>> GetBooksByFilter(int authorId, int publisherId);
 
     }
 }
