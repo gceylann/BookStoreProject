@@ -53,7 +53,7 @@ namespace Business.Concrete
 
         public IDataResult<List<BookDetailDto>> GetBookDetailsByCategory(int categoryId)
         {
-            return new SuccessDataResult<List<BookDetailDto>>(_bookDal.GetBookDetails(bc => b.CategoryId == categoryId));
+            return new SuccessDataResult<List<BookDetailDto>>(_bookDal.GetBookDetails(b => b.CategoryId == categoryId));
         }
 
         public IDataResult<Book> GetById(int bookId)
