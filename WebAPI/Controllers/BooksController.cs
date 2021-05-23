@@ -103,5 +103,52 @@ namespace WebAPI.Controllers
                 return BadRequest(result);
             }
         }
+
+        [HttpGet("getbooksbycategory")]
+        public IActionResult GetBookDetailsByCategory(int categoryId)
+        {
+            var result = _bookService.GetBookDetailsByCategory(categoryId);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+        }
+
+
+        [HttpGet("getbooksbyauthor")]
+        public IActionResult GetBookDetailsByAuthor(int authorId)
+        {
+            var result = _bookService.GetBookDetailsByAuthor(authorId);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+        }
+
+
+        [HttpGet("getbooksbyfilter")]
+        public IActionResult GetBookDetailsByFilter(int categoryId, int authorId)
+        {
+            var result = _bookService.GetBookDetailsByFilter(categoryId, authorId);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+        }
     }
 }

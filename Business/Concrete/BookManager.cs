@@ -46,9 +46,24 @@ namespace Business.Concrete
             return new SuccessDataResult<List<BookDetailDto>>(_bookDal.GetBookDetails());
         }
 
+        public IDataResult<List<BookDetailDto>> GetBookDetailsByAuthor(int authorId)
+        {
+            return new SuccessDataResult<List<BookDetailDto>>(_bookDal.GetBookDetails(b => b.AuthorId == authorId));
+        }
+
+        public IDataResult<List<BookDetailDto>> GetBookDetailsByCategory(int categoryId)
+        {
+            return new SuccessDataResult<List<BookDetailDto>>(_bookDal.GetBookDetails(bc => b.CategoryId == categoryId));
+        }
+
         public IDataResult<Book> GetById(int bookId)
         {
             return new SuccessDataResult<Book>(_bookDal.Get(b => b.BookId == bookId));
+        }
+
+        public IDataResult<List<BookDetailDto>> GetBookDetailsByFilter(int categoryId, int authorId)
+        {
+            return new SuccessDataResult<List<BookDetailDto>>(_bookDal.GetBookDetails(b => b.CategoryId == categoryId && b.AuthorId==authorId));
         }
 
         public IResult Update(Book book)
