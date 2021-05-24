@@ -24,6 +24,8 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<BookManager>().As<IBookService>().SingleInstance();
             builder.RegisterType<BookImageManager>().As<IBookImageService>().SingleInstance();
             builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
+            builder.RegisterType<AuthorManager>().As<IAuthorService>().SingleInstance();
+            builder.RegisterType<PublisherManager>().As<IPublisherService>().SingleInstance();
             builder.RegisterType<CreditCardManager>().As<ICreditCardService>().SingleInstance();
             builder.RegisterType<OrderManager>().As<IOrderService>().SingleInstance();
             builder.RegisterType<PaymentManager>().As<IPaymentService>().SingleInstance();
@@ -33,6 +35,8 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EfBookDal>().As<IBookDal>().SingleInstance();
             builder.RegisterType<EfBookImageDal>().As<IBookImageDal>().SingleInstance();
             builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
+            builder.RegisterType<EfAuthorDal>().As<IAuthorDal>().SingleInstance();
+            builder.RegisterType<EfPublisherDal>().As<IPublisherDal>().SingleInstance();
             builder.RegisterType<EfCreditCardDal>().As<ICreditCardDal>().SingleInstance();
             builder.RegisterType<EfOrderDal>().As<IOrderDal>().SingleInstance();
             builder.RegisterType<EfPaymentDal>().As<IPaymentDal>().SingleInstance();
