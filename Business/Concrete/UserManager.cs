@@ -45,6 +45,11 @@ namespace Business.Concrete
 
         }
 
+        public IDataResult<OperationClaim> GetClaimById(int userId)
+        {
+            return new SuccessDataResult<OperationClaim>(_userDal.GetClaimById(userId));
+        }
+
         public IDataResult<List<OperationClaim>> GetClaims(User user)
         {
             return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
@@ -53,6 +58,19 @@ namespace Business.Concrete
         public IResult Update(User user)
         {
             _userDal.Update(user);
+            return new SuccessResult(Messages.Updated);
+        }
+
+        public IResult UpdateSpecificInfos(User user)
+        {
+            User userInfos = GetById(user.Id).Data;
+
+            userInfos.FirstName = user.FirstName;
+            userInfos.LastName = user.LastName;
+            userInfos.Email = user.Email;
+
+            _userDal.Update(userInfos);
+
             return new SuccessResult(Messages.Updated);
         }
     }

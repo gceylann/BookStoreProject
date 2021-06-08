@@ -24,7 +24,7 @@ namespace Business.Concrete
         {
             IResult result = BusinessRules.Run(CheckBookImageCount(bookImage.ImageId));
 
-            if (result!=null)
+            if (result != null)
             {
                 return result;
             }
@@ -61,7 +61,7 @@ namespace Business.Concrete
         {
             var oldImage = _bookImageDal.Get(img => img.ImageId == bookImage.ImageId);
 
-            if (oldImage==null)
+            if (oldImage == null)
             {
                 return new ErrorResult(Messages.BookImageNotFound);
             }
@@ -70,7 +70,7 @@ namespace Business.Concrete
             _bookImageDal.Update(bookImage);
 
             return new SuccessResult(Messages.Updated);
-            
+
         }
 
 

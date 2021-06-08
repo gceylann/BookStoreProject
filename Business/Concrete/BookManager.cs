@@ -43,17 +43,24 @@ namespace Business.Concrete
 
         public IDataResult<List<BookDetailDto>> GetBookDetails(int bookId)
         {
-            return new SuccessDataResult<List<BookDetailDto>>(_bookDal.GetBookDetails());
+            if (bookId == 0)
+            {
+                return new SuccessDataResult<List<BookDetailDto>>(_bookDal.GetBookDetails());
+            }
+            else
+            {
+                return new SuccessDataResult<List<BookDetailDto>>(_bookDal.GetBookDetails(b => b.BookId == bookId));
+            }
         }
 
-        public IDataResult<List<BookDetailDto>> GetBookDetailsByAuthor(int authorId)
+        public IDataResult<List<Book>> GetBookDetailsByAuthor(int authorId)
         {
-            return new SuccessDataResult<List<BookDetailDto>>(_bookDal.GetBookDetails(b => b.AuthorId == authorId));
+            return new SuccessDataResult<List<Book>>(_bookDal.GetAll(b => b.AuthorId == authorId));
         }
 
-        public IDataResult<List<BookDetailDto>> GetBookDetailsByCategory(int categoryId)
+        public IDataResult<List<Book>> GetBookDetailsByCategory(int categoryId)
         {
-            return new SuccessDataResult<List<BookDetailDto>>(_bookDal.GetBookDetails(b => b.CategoryId == categoryId));
+            return new SuccessDataResult<List<Book>>(_bookDal.GetAll(b => b.CategoryId == categoryId));
         }
 
         public IDataResult<Book> GetById(int bookId)
@@ -61,9 +68,9 @@ namespace Business.Concrete
             return new SuccessDataResult<Book>(_bookDal.Get(b => b.BookId == bookId));
         }
 
-        public IDataResult<List<BookDetailDto>> GetBookDetailsByFilter(int categoryId, int authorId)
+        public IDataResult<List<Book>> GetBookDetailsByFilter(int categoryId, int authorId)
         {
-            return new SuccessDataResult<List<BookDetailDto>>(_bookDal.GetBookDetails(b => b.CategoryId == categoryId && b.AuthorId==authorId));
+            return new SuccessDataResult<List<Book>>(_bookDal.GetAll(b => b.CategoryId == categoryId && b.AuthorId ==authorId));
         }
 
         public IResult Update(Book book)

@@ -15,7 +15,7 @@ namespace DataAccess.Concrete
     {
         public List<BookDetailDto> GetBookDetails(Expression<Func<Book, bool>> filter = null)
         {
-            using (DatabaseContext context=new DatabaseContext())
+            using (DatabaseContext context = new DatabaseContext())
             {
                 var result = from book in context.Books
                              join category in context.Categories
@@ -29,16 +29,19 @@ namespace DataAccess.Concrete
                              select new BookDetailDto
                              {
                                  BookId = book.BookId,
+                                 CategoryId = category.CategoryId,
+                                 AuthorId = author.AuthorId,
+                                 PublisherId = publisher.PublisherId,
                                  BookName = book.BookName,
-                                 AuthorName=author.AuthorName,
-                                 PublisherName=publisher.PublisherName,
+                                 AuthorName = author.AuthorName,
+                                 PublisherName = publisher.PublisherName,
                                  Page = book.Page,
                                  Price = book.Price,
                                  Description = book.Description,
                                  CategoryName = category.CategoryName,
                                  ImagePath = image.ImagePath
                              };
-                           return result.ToList();
+                return result.ToList();
             }
         }
     }

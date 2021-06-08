@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Core.Utilities.Results;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,99 +12,57 @@ namespace Core.Utilities.Helpers
     public static class FileHelper
     {
 
-        public static string DefaultImagePath = Directory.GetCurrentDirectory() + @"\upload_images\no-image.jpg";
-        public static string UploadImagePath = Directory.GetCurrentDirectory() + @"\upload_images";
-
-
         public static string CreatePath(IFormFile file)
         {
             FileInfo fileInfo = new FileInfo(file.FileName);
-
-            string path = Path.Combine(UploadImagePath);
             string fileExtension = fileInfo.Extension;
-            string uniqueFilename = Guid.NewGuid().ToString() + fileExtension;
-            string result = $@"{path}\{uniqueFilename}";
-
+            var newPath = Guid.NewGuid().ToString() + "_" + DateTime.Now.Month + " " + DateTime.Now.Day + " " + DateTime.Now.Year + fileExtension;
+            string result = $@"\Images\{newPath}";
             return result;
 
         }
 
-        public static string AddFile(IFormFile file )
+        public static string AddFile(IFormFile file)
         {
-            string result;
-
-            try
+            var sourcepath = Path.GetTempFileName();
+            if (file.Length > 0)
             {
-                if (file==null)
+                using (var fileStream = new FileStream(sourcepath, FileMode.Create))
                 {
-                    result = DefaultImagePath;
-                    return result;
-                }
-                else
-                {
-                    result = CreatePath(file);
-                    var sourcePath = Path.GetTempFileName();
-
-                    using (var stream=new FileStream(sourcePath,FileMode.Create))
-                    {
-                        file.CopyTo(stream);
-                    }
-
-                    File.Move(sourcePath, result);
-                    return result;
+                    file.CopyTo(fileStream);
                 }
             }
-            catch (Exception exception)
-            {
-
-                return exception.Message;
-            }
+            var result = CreatePath(file);
+            File.Move(sourcepath, @"wwwroot" + result);
+            return result;
         }
 
-        public static string DeleteFile(string imagePath)
+        public static IResult DeleteFile(string imagePath)
         {
             try
             {
                 File.Delete(imagePath);
-                return "Deleted";
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-
-                return exception.Message;
+                return new ErrorResult("Dosya silinemedi: " + ex.ToString());
             }
+
+            return new SuccessResult();
         }
 
-        public static string UpdateFile(IFormFile file,string oldImagePath)
+        public static string UpdateFile(IFormFile file, string sourcePath)
         {
-            string result;
-            try
+            var result = CreatePath(file);
+            if (sourcePath.Length > 0)
             {
-                if (file==null)
+                using (var fileStream = new FileStream(result, FileMode.Create))
                 {
-                    File.Delete(oldImagePath);
-                    result = DefaultImagePath;
-                    return result;
-                }
-                else
-                {
-                    result = CreatePath(file);
-                    var sourcePath = Path.GetTempFileName();
-
-                    using (var stream=new FileStream(sourcePath,FileMode.Create))
-                    {
-                        file.CopyTo(stream);
-                    }
-
-                    File.Move(sourcePath, result);
-                    File.Delete(oldImagePath);
-                    return result;
+                    file.CopyTo(fileStream);
                 }
             }
-            catch (Exception exception)
-            {
-                return exception.Message;
-            }
+            File.Delete(sourcePath);
+            return result;
         }
     }
 }

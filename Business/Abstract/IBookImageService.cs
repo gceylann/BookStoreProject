@@ -12,7 +12,7 @@ namespace Business.Abstract
         IResult Update(BookImage bookImage, IFormFile file);
         IDataResult<List<BookImage>> GetAll();
         IDataResult<BookImage> GetById(int BookImageId);
-    
+
 
     }
 }

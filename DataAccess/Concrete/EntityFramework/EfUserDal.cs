@@ -25,5 +25,19 @@ namespace DataAccess.Concrete
             }
         }
 
+        public OperationClaim GetClaimById(int userId)
+        {
+            using (var context = new DatabaseContext())
+            {
+                var result = from oc in context.OperationClaims
+                             join uoc in context.UserOperationClaims
+                                 on oc.Id equals uoc.OperationClaimId
+                             where uoc.UserId == userId
+                             select new OperationClaim { Id = oc.Id, Name = oc.Name };
+                return result.SingleOrDefault();
+
+            }
+        }
+
     }
 }
