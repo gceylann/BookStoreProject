@@ -18,7 +18,7 @@ Ayrıca veri çıkarma, ekleme, silme, güncelleme gibi işlemler de bu katmanda
 gerektiği burada tanımlanır. Uygulamayı dikine kesen ilgi alanları(Cross-Cutting Concerns) bu katmanda tetiklenir.
 #### 4-Core Layer: 
 Tüm katmanlarda ortak kullanılacak yapıların ve evrensel operasyonların kodlandığı kısımdır.
-####6-Servis Katmanı (Web API): 
+#### 5-Servis Katmanı (Web API): 
 Front-End kısmı ve diğer platformların program ile haberleşip işlem yapmasını sağlayan servislerin yazıldığı kısımdır.
 
 ### Kullanılan Teknolojiler
