@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspect.Autofac;
 using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -16,12 +17,14 @@ namespace Business.Concrete
             _authorDal = authorDal;
         }
 
+        [SecuredOperation("admin")]
         public IResult Add(Author author)
         {
             _authorDal.Add(author);
             return new SuccessResult(Messages.Added);
         }
 
+        [SecuredOperation("admin")]
         public IResult Delete(Author author)
         {
             _authorDal.Delete(author);
@@ -38,6 +41,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Author>(_authorDal.Get(c => c.AuthorId == authorId));
         }
 
+        [SecuredOperation("admin")]
         public IResult Update(Author author)
         {
             _authorDal.Update(author);

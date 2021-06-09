@@ -1,5 +1,9 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspect.Autofac;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -21,7 +25,9 @@ namespace Business.Concrete
             _bookDal = bookDal;
         }
 
-
+        //[SecuredOperation("admin")]
+        [ValidationAspect(typeof(BookValidator))]
+        [CacheRemoveAspect("IBookService.Get")]
         public IResult Add(Book book)
         {
             _bookDal.Add(book);
@@ -36,11 +42,15 @@ namespace Business.Concrete
             return new SuccessResult(Messages.Deleted);
         }
 
+        [CacheAspect]
+        [PerformanceAspect(5)]
         public IDataResult<List<Book>> GetAll()
         {
             return new SuccessDataResult<List<Book>>(_bookDal.GetAll());
         }
 
+        [CacheAspect]
+        [PerformanceAspect(5)]
         public IDataResult<List<BookDetailDto>> GetBookDetails(int bookId)
         {
             if (bookId == 0)
@@ -53,21 +63,29 @@ namespace Business.Concrete
             }
         }
 
+        [CacheAspect]
+        [PerformanceAspect(5)]
         public IDataResult<List<Book>> GetBookDetailsByAuthor(int authorId)
         {
             return new SuccessDataResult<List<Book>>(_bookDal.GetAll(b => b.AuthorId == authorId));
         }
 
+        [CacheAspect]
+        [PerformanceAspect(5)]
         public IDataResult<List<Book>> GetBookDetailsByCategory(int categoryId)
         {
             return new SuccessDataResult<List<Book>>(_bookDal.GetAll(b => b.CategoryId == categoryId));
         }
 
+        [CacheAspect]
+        [PerformanceAspect(5)]
         public IDataResult<Book> GetById(int bookId)
         {
             return new SuccessDataResult<Book>(_bookDal.Get(b => b.BookId == bookId));
         }
 
+        [CacheAspect]
+        [PerformanceAspect(5)]
         public IDataResult<List<Book>> GetBookDetailsByFilter(int categoryId, int authorId)
         {
             return new SuccessDataResult<List<Book>>(_bookDal.GetAll(b => b.CategoryId == categoryId && b.AuthorId ==authorId));

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspect.Autofac;
 using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -16,12 +17,14 @@ namespace Business.Concrete
             _publisherDal = publisherDal;
         }
 
+        [SecuredOperation("admin")]
         public IResult Add(Publisher publisher)
         {
             _publisherDal.Add(publisher);
             return new SuccessResult(Messages.Added);
         }
 
+        [SecuredOperation("admin")]
         public IResult Delete(Publisher publisher)
         {
             _publisherDal.Delete(publisher);
@@ -38,6 +41,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Publisher>(_publisherDal.Get(c => c.PublisherId == publisherId));
         }
 
+        [SecuredOperation("admin")]
         public IResult Update(Publisher publisher)
         {
             _publisherDal.Update(publisher);
