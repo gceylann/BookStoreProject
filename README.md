@@ -40,14 +40,10 @@ Front-End kısmı ve diğer platformların program ile haberleşip işlem yapmas
 * Cross Cutting Concerns
    *  Caching
    *  Validation
-* Extensions
-* Claim
 * Claim Principal
 * Exception Middleware
-* Service Collection
 * Error Handling
-  *  Error Details
-  *  Validation Error Details
+
 
 ### Gereksinimler
 #### Paketler
